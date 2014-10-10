@@ -23,6 +23,11 @@ public class VectorsPattern implements Pattern {
   }
   @Override
   public boolean belongsToPattern(Point p, Point origin) {
+    Point normalized = new Point(p.getX() - origin.getX(), p.getY() - origin.getY());
+    
+    for (Point v : vectors) {
+      if(v.getY() * normalized.getX() == v.getX() * normalized.getY()) return true;
+    }
     return false;
   }
 }

@@ -11,8 +11,10 @@ public class PointsPattern implements Pattern {
 
   @Override
   public boolean belongsToPattern(Point p, Point origin) {
+    Point normalized = new Point(p.getX() - origin.getX(), p.getY() - origin.getY());
+    
     for (Point point : pp) {
-      if(point.equals(p)) return true;
+      if(point.equals(normalized)) return true;
     }
     return false;
   }

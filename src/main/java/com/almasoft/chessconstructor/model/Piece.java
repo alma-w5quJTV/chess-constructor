@@ -29,4 +29,8 @@ public class Piece {
     Assert.assertNotNull(p);
     return type.getCapture().belongsToPattern(p, position);
   }
+  @Override
+  public String toString() {
+    return "Piece [type=" + type + ", position=" + position + "]";
+  }
 }

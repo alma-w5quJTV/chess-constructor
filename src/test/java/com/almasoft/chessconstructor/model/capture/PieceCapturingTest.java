@@ -44,4 +44,14 @@ public class PieceCapturingTest {
     Assert.assertTrue(bisshop.doesCapture(new Point(6,0)));
     Assert.assertFalse(bisshop.doesCapture(new Point(6,1)));
   }
+  @Test
+  public void testKnight(){
+    Piece knight = new Piece(PieceType.KNIGHT);
+    
+    knight.setPosition(new Point(0,0));
+    Assert.assertTrue(knight.doesCapture(new Point(0,0)));
+    Assert.assertTrue(knight.doesCapture(new Point(2,1)));
+    Assert.assertTrue(knight.doesCapture(new Point(1,2)));
+    
+  }
 }

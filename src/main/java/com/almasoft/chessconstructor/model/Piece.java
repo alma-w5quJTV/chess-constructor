@@ -21,7 +21,7 @@ public class Piece {
   }
   
   /**
-   * Tests whether this Piece captures passed point.
+   * Tests whether this Piece captures given argument point.
    * @param p
    * @return
    */

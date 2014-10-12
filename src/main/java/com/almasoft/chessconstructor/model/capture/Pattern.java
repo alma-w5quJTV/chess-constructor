@@ -1,5 +1,6 @@
 package com.almasoft.chessconstructor.model.capture;
 
+import com.almasoft.chessconstructor.model.Board;
 import com.almasoft.chessconstructor.model.Point;
 
 /**
@@ -18,4 +19,10 @@ public interface Pattern {
    * @return
    */
   boolean belongsToPattern(Point p, Point origin);
+  /**
+   * Visits every cell of the pattern with origin starting form origin.
+   * @param board
+   * @param v
+   */
+  void visit(Board board, Point origin, Visitor v);
 }

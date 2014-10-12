@@ -35,6 +35,7 @@ public class Point {
   public static final Point PLUS_Y = new Point(0,1);
   public static final Point PLUS_XY = new Point(1,1);
   public static final Point MINUS_XY = new Point(1,-1);
+  public static final Point POINT_0_0 = new Point(0,0);
   
   public Point() {}
   public Point(int x, int y) {

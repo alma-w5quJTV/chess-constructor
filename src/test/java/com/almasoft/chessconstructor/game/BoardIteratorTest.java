@@ -5,13 +5,18 @@ import java.util.Iterator;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.almasoft.chessconstructor.base.GuiceBaseTest;
 import com.almasoft.chessconstructor.model.Board;
 import com.almasoft.chessconstructor.model.Point;
 import com.almasoft.chessconstructor.strategy.State;
+import com.google.inject.Inject;
 
-public class BoardIteratorTest {
+public class BoardIteratorTest extends GuiceBaseTest{
+  
+  @Inject Board board;
+  
   @Test public void testIterator(){
-    Board board = new Board(new Point(3,5));
+    board.init(new Point(3,5));
     
     State state = new State();
     

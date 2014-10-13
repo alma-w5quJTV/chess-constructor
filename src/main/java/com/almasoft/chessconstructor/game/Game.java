@@ -1,48 +1,32 @@
 package com.almasoft.chessconstructor.game;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-
 import com.almasoft.chessconstructor.model.Board;
 import com.almasoft.chessconstructor.model.PieceType;
 import com.almasoft.chessconstructor.model.Point;
 import com.almasoft.chessconstructor.strategy.GameStream;
 import com.almasoft.chessconstructor.strategy.PositionStrategy;
+import com.google.inject.Inject;
 
 public class Game {
-  private Map<PieceType, Integer> game = new HashMap<PieceType, Integer>();
+  @Inject Board board; 
+  
+  @Inject OrderingPieceStrategy orderingPieceStrategy;
   
   public Game putPiece(PieceType type, int number){
-    game.put(type, Integer.valueOf(number));
+    orderingPieceStrategy.put(type, Integer.valueOf(number));
     return this;
   }
   
   public PieceType takeNextPiece(){
-    //TODO make strategy
-    Set<PieceType> keys = game.keySet();
-    if(keys != null && keys.size() > 0){
-      PieceType key = keys.iterator().next();
-      int number = game.get(key);
-      if(--number == 0){
-        game.remove(key);
-      }else{
-        game.put(key, Integer.valueOf(number));
-      }
-      return key;
-    }
-    return null;
+    return orderingPieceStrategy.giveNextPiece();
   }
   
-  
   public void startGame(int sizeX, int sizeY, GameStream out){
-    Board board = new Board(new Point(sizeX, sizeY));
+    board.init(new Point(sizeX, sizeY));
+    
     PositionStrategy strategy = new PositionStrategy();
     strategy.setResultStream(out);
     
     strategy.layout(board, this);
-  }
-  
-  public static void main(String[] args) {
   }
 }

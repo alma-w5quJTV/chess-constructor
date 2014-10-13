@@ -3,9 +3,11 @@ package com.almasoft.chessconstructor.strategy;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.almasoft.chessconstructor.base.GuiceBaseTest;
 import com.almasoft.chessconstructor.game.Game;
 import com.almasoft.chessconstructor.game.SimpleGameStream;
 import com.almasoft.chessconstructor.model.PieceType;
+import com.google.inject.Inject;
 /**
  * 
  * @author andriy_kostin
@@ -22,28 +24,32 @@ import com.almasoft.chessconstructor.model.PieceType;
  *  [7 x 7], Number is 3063828, time = 4963 ms (e.g. 3063828 = 24510624 / (2! 2! 2!))
  *
  */
-public class StrategyTest {
+public class StrategyTest extends GuiceBaseTest{
+  
+  @Inject Game game;
+  
+  
   @Test public void test3x3(){
-    SimpleGameStream out = startGame(3, 3, new Game().putPiece(PieceType.ROOK, 1).putPiece(PieceType.KING, 2));
+    SimpleGameStream out = startGame(3, 3, game.putPiece(PieceType.ROOK, 1).putPiece(PieceType.KING, 2));
     Assert.assertEquals(4, out.getCounter());
   }
   @Test public void test4x4(){
-    SimpleGameStream out = startGame(4, 4, new Game().putPiece(PieceType.ROOK, 2).putPiece(PieceType.KNIGHT, 4));
+    SimpleGameStream out = startGame(4, 4, game.putPiece(PieceType.ROOK, 2).putPiece(PieceType.KNIGHT, 4));
     Assert.assertEquals(8, out.getCounter());
   }
   @Test public void test5x5(){
-    SimpleGameStream out = startGame(5, 5, new Game().putPiece(PieceType.KING, 9));
+    SimpleGameStream out = startGame(5, 5, game.putPiece(PieceType.KING, 9));
     Assert.assertEquals(1, out.getCounter());
   }
   @Test(timeout = 10000) public void test7x7(){
-    SimpleGameStream out = startGame(7, 7, new Game().putPiece(PieceType.KING, 2).putPiece(PieceType.QUEEN, 2).putPiece(PieceType.BISSHOP, 2).putPiece(PieceType.KNIGHT, 1));
+    SimpleGameStream out = startGame(7, 7, game.putPiece(PieceType.KING, 2).putPiece(PieceType.QUEEN, 2).putPiece(PieceType.BISSHOP, 2).putPiece(PieceType.KNIGHT, 1));
     Assert.assertEquals(3063828, out.getCounter());
   }
   /**
    * 
    */
   @Test(timeout = 5000) public void test10x10(){
-    SimpleGameStream out = startGame(10,10,new Game().putPiece(PieceType.KING, 2).putPiece(PieceType.QUEEN, 2).putPiece(PieceType.BISSHOP, 2).putPiece(PieceType.KNIGHT, 1));
+    SimpleGameStream out = startGame(10,10, game.putPiece(PieceType.KING, 2).putPiece(PieceType.QUEEN, 2).putPiece(PieceType.BISSHOP, 2).putPiece(PieceType.KNIGHT, 1));
     Assert.assertEquals(8, out.getCounter());
   }
   

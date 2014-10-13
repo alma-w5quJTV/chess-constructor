@@ -7,13 +7,18 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.almasoft.chessconstructor.base.GuiceBaseTest;
 import com.almasoft.chessconstructor.model.Piece;
 import com.almasoft.chessconstructor.model.PieceType;
 import com.almasoft.chessconstructor.strategy.State;
+import com.google.inject.Inject;
 
-public class StateTest {
+public class StateTest extends GuiceBaseTest {
+  
+  @Inject Game game;
+  
   @Test public void testStateOperations(){
-    Game game = new Game()
+    game  
       .putPiece(PieceType.KING, 1)
       .putPiece(PieceType.QUEEN, 3)
       .putPiece(PieceType.ROOK, 2);

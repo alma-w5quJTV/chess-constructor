@@ -4,13 +4,19 @@ package com.almasoft.chessconstructor.game;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.almasoft.chessconstructor.base.GuiceBaseTest;
 import com.almasoft.chessconstructor.model.PieceType;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
+import com.google.inject.Inject;
 
-public class GameTest {
+public class GameTest extends GuiceBaseTest {
+  
+  @Inject Game game;
+  
   @Test public void testGamePopulation(){
-    Game game = new Game().putPiece(PieceType.KING, 1).putPiece(PieceType.QUEEN, 1).putPiece(PieceType.ROOK, 2);
+    
+    game.putPiece(PieceType.KING, 1).putPiece(PieceType.QUEEN, 1).putPiece(PieceType.ROOK, 2);
     Multiset<PieceType> bag = HashMultiset.create();
     
     PieceType pt = null;

@@ -19,9 +19,15 @@ import com.google.inject.Inject;
  *
  *  Second iteration (permutations fix)
  *  [3 x 3], Number is 4, time = 7 ms
- *  [4 x 4], Number is 8, time = 8 ms (8 = 384 / (2! 4!) )
+ *  [4 x 4], Number is 8, time = 35 ms (8 = 384 / (2! 4!) )
  *  [5 x 5], Number is 1, time = 47 ms
  *  [7 x 7], Number is 3063828, time = 4963 ms (e.g. 3063828 = 24510624 / (2! 2! 2!))
+ *
+ *  Third iteration ordered Piece Strategy 
+ *  [3 x 3], Number is 4, time = 3 ms
+ *  [4 x 4], Number is 8, time = 6 ms
+ *  [5 x 5], Number is 1, time = 34 ms
+ *  [7 x 7], Number is 3063828, time = 2284 ms
  *
  */
 public class StrategyTest extends GuiceBaseTest{

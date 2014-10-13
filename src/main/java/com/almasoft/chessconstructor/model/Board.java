@@ -58,7 +58,7 @@ public class Board {
   }
 
   public Iterator<Point> possiblePositionsIterator(State state){
-    //TODO same type fitures.
+    //TODO same type figures.
     return new BoardIterator();
   }
   /**

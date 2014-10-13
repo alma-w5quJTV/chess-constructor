@@ -8,7 +8,12 @@ import com.almasoft.chessconstructor.model.Piece;
 import com.almasoft.chessconstructor.model.Point;
 
 public class PositionStrategy {
-  int counter = 0;
+  
+  private GameStream resultStream;
+  public void setResultStream(GameStream resultStream) {
+    this.resultStream = resultStream;
+  }
+
   public void layout(Board board, Game game){
     State state = new State();
     state.init(game);
@@ -16,16 +21,12 @@ public class PositionStrategy {
     layoutPiece(board, state);
   }
   
-  private void emitState(State state) {
-    counter ++;
-//    System.out.println(state);
-  }
-  
   private void layoutPiece(Board board, State state) {
     Piece piece = state.take();
     
     for (Iterator<Point> iterator = board.possiblePositionsIterator(state); iterator.hasNext();) {
       Point p = iterator.next();
+      
       piece.setPosition(p);
       
       //verify capturing
@@ -37,7 +38,7 @@ public class PositionStrategy {
           layoutPiece(board, state);
         }
         else{
-          emitState(state);
+          resultStream.onGameReady(state);
         }
         board.removePiece(piece);
       }
@@ -46,7 +47,5 @@ public class PositionStrategy {
     state.offer();
   }
 
-  public int getCounter() {
-    return counter;
-  }
+ 
 }

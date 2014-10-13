@@ -7,6 +7,7 @@ import java.util.Set;
 import com.almasoft.chessconstructor.model.Board;
 import com.almasoft.chessconstructor.model.PieceType;
 import com.almasoft.chessconstructor.model.Point;
+import com.almasoft.chessconstructor.strategy.GameStream;
 import com.almasoft.chessconstructor.strategy.PositionStrategy;
 
 public class Game {
@@ -34,19 +35,14 @@ public class Game {
   }
   
   
-  public void startGame(int sizeX, int sizeY){
-    long start = System.currentTimeMillis();
-    
+  public void startGame(int sizeX, int sizeY, GameStream out){
     Board board = new Board(new Point(sizeX, sizeY));
     PositionStrategy strategy = new PositionStrategy();
+    strategy.setResultStream(out);
     
     strategy.layout(board, this);
-    long finish = System.currentTimeMillis();
-    System.out.println(String.format("Number is %d, time = %d ms", strategy.getCounter(), finish - start));
   }
   
   public static void main(String[] args) {
-    Game game = new Game().putPiece(PieceType.KING, 2).putPiece(PieceType.QUEEN, 2).putPiece(PieceType.BISSHOP, 2).putPiece(PieceType.KNIGHT, 1);
-    game.startGame(7, 7);
   }
 }

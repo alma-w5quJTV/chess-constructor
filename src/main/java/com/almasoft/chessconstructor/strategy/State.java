@@ -47,7 +47,7 @@ public class State{
     return state.get(pointer ++);
   }
   public Piece getCurrent(){
-    return state.get(pointer - 1);
+    return state.size() == 0 ? null : state.get(pointer - 1);
   }
   public Piece getPrevious(){
     Piece retVal = null;

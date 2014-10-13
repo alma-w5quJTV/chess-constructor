@@ -15,6 +15,12 @@ import com.almasoft.chessconstructor.model.PieceType;
  *  [4 x 4], Number is 384, time = 35 ms
  *  [7 x 7], Number is 24510624, time = 16490 ms
  *
+ *  Second iteration (permutations fix)
+ *  [3 x 3], Number is 4, time = 7 ms
+ *  [4 x 4], Number is 8, time = 8 ms (8 = 384 / (2! 4!) )
+ *  [5 x 5], Number is 1, time = 47 ms
+ *  [7 x 7], Number is 3063828, time = 4963 ms (e.g. 3063828 = 24510624 / (2! 2! 2!))
+ *
  */
 public class StrategyTest {
   @Test public void test3x3(){
@@ -25,9 +31,13 @@ public class StrategyTest {
     SimpleGameStream out = startGame(4, 4, new Game().putPiece(PieceType.ROOK, 2).putPiece(PieceType.KNIGHT, 4));
     Assert.assertEquals(8, out.getCounter());
   }
-  @Test(timeout = 5000) public void test7x7(){
+  @Test public void test5x5(){
+    SimpleGameStream out = startGame(5, 5, new Game().putPiece(PieceType.KING, 9));
+    Assert.assertEquals(1, out.getCounter());
+  }
+  @Test(timeout = 10000) public void test7x7(){
     SimpleGameStream out = startGame(7, 7, new Game().putPiece(PieceType.KING, 2).putPiece(PieceType.QUEEN, 2).putPiece(PieceType.BISSHOP, 2).putPiece(PieceType.KNIGHT, 1));
-    Assert.assertEquals(8, out.getCounter());
+    Assert.assertEquals(3063828, out.getCounter());
   }
   /**
    * 

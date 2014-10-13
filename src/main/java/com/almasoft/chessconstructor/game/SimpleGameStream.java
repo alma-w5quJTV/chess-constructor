@@ -10,7 +10,6 @@ public class SimpleGameStream implements GameStream{
   @Override
   public void onGameReady(State state) {
     counter ++;
-//    System.out.println(state);    
   }
   public int getCounter() {
     return counter;

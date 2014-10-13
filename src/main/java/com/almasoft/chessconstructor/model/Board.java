@@ -6,7 +6,7 @@ import com.almasoft.chessconstructor.model.capture.Visitor;
 import com.almasoft.chessconstructor.strategy.State;
 
 /**
- * TODO extract interface, get rid from boolean arrays.
+ * TODO extract interface, get rid from integer arrays.
  * @author andriy_kostin
  *
  */
@@ -58,8 +58,7 @@ public class Board {
   }
 
   public Iterator<Point> possiblePositionsIterator(State state){
-    //TODO same type figures.
-    return new BoardIterator();
+    return new BoardIterator(state);
   }
   /**
    * update BlackSet, Gray Set
@@ -83,8 +82,22 @@ public class Board {
    *
    */
   private class BoardIterator implements Iterator<Point>{
-    int x = -1;
-    int y = 0;
+    private int x;
+    private int y;
+    BoardIterator(State state) {
+      Piece current = state.getCurrent();
+      Piece prev = state.getPrevious();
+      if(current == null || prev == null || prev.getType() != current.getType()){
+        x = -1;
+        y = 0;
+      }else{
+        //put start of iterator to next to prev position
+        Point prevPosition = prev.getPosition();
+        x = prevPosition.getX();
+        y = prevPosition.getY();
+      }
+    }
+
     @Override
     
     

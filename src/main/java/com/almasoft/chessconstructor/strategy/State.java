@@ -57,6 +57,9 @@ public class State{
     }
     return retVal;
   }
+  public int size(){
+    return state.size();
+  }
   public void offer(){
     pointer --;
   }

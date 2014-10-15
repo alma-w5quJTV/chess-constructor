@@ -29,4 +29,12 @@ public class Game {
     
     strategy.layout(board, this);
   }
+
+  public OrderingPieceStrategy getOrderingPieceStrategy() {
+    return orderingPieceStrategy;
+  }
+
+  public void setOrderingPieceStrategy(OrderingPieceStrategy orderingPieceStrategy) {
+    this.orderingPieceStrategy = orderingPieceStrategy;
+  }
 }

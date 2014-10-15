@@ -1,5 +1,11 @@
 package com.almasoft.chessconstructor.strategy;
 
+/**
+ * Stream that is used for handling result of Strategy.
+ * 
+ * @author Andriy_Kostin
+ *
+ */
 public interface GameStream {
   /**
    * Called when new valid non-conflicting state found.
@@ -7,4 +13,10 @@ public interface GameStream {
    * 
    */
   void onGameReady(State state);
+  /**
+   * 
+   * @return number of times when onGameReady method was called. In some 
+   * cases (various strategy implementations) this number can be greater than actual number of distinct solutions
+   */
+  int getCounter();
 }

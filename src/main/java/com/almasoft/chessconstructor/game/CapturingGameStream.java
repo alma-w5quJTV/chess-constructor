@@ -1,5 +1,6 @@
 package com.almasoft.chessconstructor.game;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -23,13 +24,14 @@ import com.google.common.collect.Iterators;
 public class CapturingGameStream implements GameStream{
   
   private Set<Solution> solutions = new TreeSet<Solution>();
-  private int counter;
+  protected int counter;
 
   @Override
   public void onGameReady(State state) {
     counter ++;
     solutions.add(new Solution(state));
   }
+
   public int getCounter() {
     return counter;
   }
@@ -37,25 +39,24 @@ public class CapturingGameStream implements GameStream{
   public Set<Solution> getSolutions() {
     return solutions;
   }
-  public StringBuilder print(Point dimention){
+  public StringBuilder print(Point dimention) throws IOException{
     StringBuilder out = new StringBuilder();
     for (Iterator<Solution> i = solutions.iterator(); i.hasNext();) {
-      Solution solution = i.next();
-      Arrays.sort(solution.pieces, new Comparator<Piece>(){
-        @Override
-        public int compare(Piece o1, Piece o2) {
-          return o1.y == o2.y ? (o1.x - o2.x) : o1.y - o2.y;
-        }});
-      print(out, solution.pieces, dimention);
+      print(out, i.next(), dimention);
     }
     return out;
   }
 
-  private void print(StringBuilder out, Piece[] pieces, Point dimention) {
+  public void print(Appendable out, Solution solution, Point dimention) throws IOException {
+    Arrays.sort(solution.pieces, new Comparator<Piece>(){
+      @Override
+      public int compare(Piece o1, Piece o2) {
+        return o1.y == o2.y ? (o1.x - o2.x) : o1.y - o2.y;
+      }});
+    Piece[] pieces = solution.pieces;
     int x = 0;
     int y = 0;
     int p = 0;
-    System.out.println("sorted: "+Arrays.toString(pieces));
     out.append("--------\n");
     
     for(int i = 0; i < dimention.getX() * dimention.getY(); i++){
@@ -73,8 +74,8 @@ public class CapturingGameStream implements GameStream{
     }
   }
 
-  private static class Solution implements Comparable<Solution>{
-    private Solution(State st){
+  public static class Solution implements Comparable<Solution>{
+    public Solution(State st){
       pieces = new Piece[st.size()];
       
       Iterator<Piece> i = Iterators.transform(st.getPlacedPiecesIterator(), new Function<com.almasoft.chessconstructor.model.Piece, Piece>(){

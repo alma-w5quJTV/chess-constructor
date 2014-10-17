@@ -1,10 +1,12 @@
 package com.almasoft.chessconstructor.game;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
+import com.almasoft.chessconstructor.model.Point;
 import com.almasoft.chessconstructor.strategy.GameStream;
 import com.almasoft.chessconstructor.strategy.State;
 import com.google.common.base.Function;
@@ -35,10 +37,45 @@ public class CapturingGameStream implements GameStream{
   public Set<Solution> getSolutions() {
     return solutions;
   }
+  public StringBuilder print(Point dimention){
+    StringBuilder out = new StringBuilder();
+    for (Iterator<Solution> i = solutions.iterator(); i.hasNext();) {
+      Solution solution = i.next();
+      Arrays.sort(solution.pieces, new Comparator<Piece>(){
+        @Override
+        public int compare(Piece o1, Piece o2) {
+          return o1.y == o2.y ? (o1.x - o2.x) : o1.y - o2.y;
+        }});
+      print(out, solution.pieces, dimention);
+    }
+    return out;
+  }
+
+  private void print(StringBuilder out, Piece[] pieces, Point dimention) {
+    int x = 0;
+    int y = 0;
+    int p = 0;
+    System.out.println("sorted: "+Arrays.toString(pieces));
+    out.append("--------\n");
+    
+    for(int i = 0; i < dimention.getX() * dimention.getY(); i++){
+      if(p < pieces.length && pieces[p].x == x && pieces[p].y == y){
+        out.append(" ").append(pieces[p].pieceType)/*.append(p)*/.append(" ");
+        p++;
+      }else{
+        out.append(" . ");
+      }
+      x = (x + 1) % dimention.getX();
+      if(x == 0){
+        y ++;
+        out.append("|\n");
+      }
+    }
+  }
 
   private static class Solution implements Comparable<Solution>{
     private Solution(State st){
-      solution = new Piece[st.size()];
+      pieces = new Piece[st.size()];
       
       Iterator<Piece> i = Iterators.transform(st.getPlacedPiecesIterator(), new Function<com.almasoft.chessconstructor.model.Piece, Piece>(){
         @Override
@@ -51,16 +88,16 @@ public class CapturingGameStream implements GameStream{
         }
       });
       
-      solution = Iterators.toArray(i, Piece.class);
+      pieces = Iterators.toArray(i, Piece.class);
       
-      Arrays.sort(solution);
+      Arrays.sort(pieces);
     }
-    private Piece[] solution;
+    private Piece[] pieces;
     @Override
     public int hashCode() {
       final int prime = 31;
       int result = 1;
-      result = prime * result + Arrays.hashCode(solution);
+      result = prime * result + Arrays.hashCode(pieces);
       return result;
     }
     @Override
@@ -72,16 +109,16 @@ public class CapturingGameStream implements GameStream{
       if (getClass() != obj.getClass())
         return false;
       Solution other = (Solution) obj;
-      if (!Arrays.equals(solution, other.solution))
+      if (!Arrays.equals(pieces, other.pieces))
         return false;
       return true;
     }
     @Override
     public int compareTo(Solution o) {
-      int retVal = o.solution.length - solution.length; 
+      int retVal = o.pieces.length - pieces.length; 
       if(retVal == 0){
-        for (int i = 0; i < solution.length; i++) {
-          retVal = solution[i].compareTo(o.solution[i]);
+        for (int i = 0; i < pieces.length; i++) {
+          retVal = pieces[i].compareTo(o.pieces[i]);
           if(retVal != 0) break;
         }
       }
@@ -90,8 +127,8 @@ public class CapturingGameStream implements GameStream{
     @Override
     public String toString() {
       StringBuilder sb = new StringBuilder();
-      for (int i = 0; i < solution.length; i++) {
-        sb.append(solution[i]);
+      for (int i = 0; i < pieces.length; i++) {
+        sb.append(pieces[i]);
       }
       sb.append("\n");
       return sb.toString();

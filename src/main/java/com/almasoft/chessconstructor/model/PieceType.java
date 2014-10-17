@@ -28,7 +28,7 @@ public enum PieceType {
         new Point(-2,-1),
         new Point(1,-2),
         new Point(-1,-2)), false),
-  BISSHOP('B',
+  BISHOP('B',
       new VectorsPattern(
         Point.VECTOR_1_1,
         Point.VECTOR_m1_1), true), 
@@ -38,7 +38,7 @@ public enum PieceType {
         Point.VECTOR_0_1), true), 
   QUEEN('Q',
       new UnionPattern()
-        .plus(BISSHOP.getCapture())
+        .plus(BISHOP.getCapture())
         .plus(ROOK.getCapture()), true);
   PieceType(char code, Pattern capture, boolean isLinear){
     this.capture = capture;

@@ -88,7 +88,7 @@ public class BlackGraySetAwareArrayBoard implements Board{
         retVal = lines.isLineMarked(x, y, NMLineEncoder.DIAGONAL_LINE_MASK) || lines.isLineMarked(x, y, NMLineEncoder.CO_DIAGONAL_LINE_MASK);
         if(retVal) return true;
       }
-      if(type != PieceType.BISSHOP){//ROOK + QUEEN
+      if(type != PieceType.BISHOP){//ROOK + QUEEN
         retVal = lines.isLineMarked(x, y, NMLineEncoder.VERTICAL_LINE_MASK) || lines.isLineMarked(x, y, NMLineEncoder.HORISONTAL_LINE_MASK);
       }
       
@@ -141,7 +141,7 @@ public class BlackGraySetAwareArrayBoard implements Board{
       blackLines.markLine(x, y, NMLineEncoder.DIAGONAL_LINE_MASK,isMark);
       blackLines.markLine(x, y, NMLineEncoder.CO_DIAGONAL_LINE_MASK,isMark);
     }
-    if(type != PieceType.BISSHOP){//ROOK + QUEEN
+    if(type != PieceType.BISHOP){//ROOK + QUEEN
       blackLines.markLine(x, y, NMLineEncoder.VERTICAL_LINE_MASK,isMark);
       blackLines.markLine(x, y, NMLineEncoder.HORISONTAL_LINE_MASK,isMark);
     }

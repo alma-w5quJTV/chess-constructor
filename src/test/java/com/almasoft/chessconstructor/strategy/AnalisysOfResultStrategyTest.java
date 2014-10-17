@@ -26,14 +26,14 @@ public class AnalisysOfResultStrategyTest extends GuiceBaseTest{
   } 
   
   @Test public void test7x7(){
-    CapturingGameStream out = startGame(7, 7, game.putPiece(PieceType.KING, 2).putPiece(PieceType.QUEEN, 2).putPiece(PieceType.BISSHOP, 2).putPiece(PieceType.KNIGHT, 1));
+    CapturingGameStream out = startGame(7, 7, game.putPiece(PieceType.KING, 2).putPiece(PieceType.QUEEN, 2).putPiece(PieceType.BISHOP, 2).putPiece(PieceType.KNIGHT, 1));
     Assert.assertEquals(3063828, out.getCounter());
     
     Assert.assertEquals(out.getCounter(), ((CapturingGameStream)out).getSolutions().size());
   }
   
   @Test public void test3x3(){
-    CapturingGameStream out = startGame(3, 3, game.putPiece(PieceType.ROOK, 2).putPiece(PieceType.BISSHOP, 1));
+    CapturingGameStream out = startGame(3, 3, game.putPiece(PieceType.ROOK, 2).putPiece(PieceType.BISHOP, 1));
     Assert.assertEquals(4, out.getCounter());
     Assert.assertEquals(out.getCounter(), ((CapturingGameStream)out).getSolutions().size());
   }

@@ -87,7 +87,7 @@ public class StrategyTest extends GuiceBaseTest{
   }
 
   @Test public void testLinear5x5(){
-    GameStream out = startGame(5, 5, game.putPiece(PieceType.ROOK, 2).putPiece(PieceType.BISSHOP, 2),null);
+    GameStream out = startGame(5, 5, game.putPiece(PieceType.ROOK, 2).putPiece(PieceType.BISHOP, 2),null);
     Assert.assertEquals(1388, out.getCounter());
   }
 
@@ -107,26 +107,26 @@ public class StrategyTest extends GuiceBaseTest{
   @Test public void test2BishopNxM(){
     int x = 50;
     int y = 60;
-    GameStream out = startGame(x, y, game.putPiece(PieceType.BISSHOP, 2),null);
+    GameStream out = startGame(x, y, game.putPiece(PieceType.BISHOP, 2),null);
     Assert.assertEquals(4393150 , out.getCounter());
   }
   
   @Test public void testRRB_3x3(){
     CapturingGameStream out = new CapturingGameStream();
-    startGame(3, 3, game.putPiece(PieceType.ROOK, 2).putPiece(PieceType.BISSHOP, 1), out);
+    startGame(3, 3, game.putPiece(PieceType.ROOK, 2).putPiece(PieceType.BISHOP, 1), out);
     Assert.assertEquals(4 , out.getCounter());
   }
   @Test public void testRRB_10x17(){
-    GameStream out = startGame(10, 17, game.putPiece(PieceType.ROOK, 2).putPiece(PieceType.BISSHOP, 1), null);
+    GameStream out = startGame(10, 17, game.putPiece(PieceType.ROOK, 2).putPiece(PieceType.BISHOP, 1), null);
     Assert.assertEquals(1195840 , out.getCounter());
   }
   @Test(timeout = 5000) public void test7x7(){
-    GameStream out = startGame(7, 7, game.putPiece(PieceType.KING, 2).putPiece(PieceType.QUEEN, 2).putPiece(PieceType.BISSHOP, 2).putPiece(PieceType.KNIGHT, 1),null);
+    GameStream out = startGame(7, 7, game.putPiece(PieceType.KING, 2).putPiece(PieceType.QUEEN, 2).putPiece(PieceType.BISHOP, 2).putPiece(PieceType.KNIGHT, 1),null);
     Assert.assertEquals(3063828, out.getCounter());
   }
   
   @Test/*(timeout = 5000)*/ @Ignore public void test10x10(){
-    GameStream out = startGame(10,10, game.putPiece(PieceType.KING, 2).putPiece(PieceType.QUEEN, 2).putPiece(PieceType.BISSHOP, 2).putPiece(PieceType.KNIGHT, 1),null);
+    GameStream out = startGame(10,10, game.putPiece(PieceType.KING, 2).putPiece(PieceType.QUEEN, 2).putPiece(PieceType.BISHOP, 2).putPiece(PieceType.KNIGHT, 1),null);
     Assert.assertEquals(8, out.getCounter());
   }
   

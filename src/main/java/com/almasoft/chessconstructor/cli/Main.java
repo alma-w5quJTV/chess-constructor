@@ -83,7 +83,7 @@ public class Main {
       game.putPiece(PieceType.ROOK, readPositiveNumber(sc));
       
       System.out.print("\nPlease enter number (>=0) of Bishop (B): ");
-      game.putPiece(PieceType.BISSHOP, readPositiveNumber(sc));
+      game.putPiece(PieceType.BISHOP, readPositiveNumber(sc));
       
       System.out.print("\nPrint all possible cases? (Y/N) [Y]: ");
       boolean print = readBoolean(sc);
@@ -108,9 +108,9 @@ public class Main {
       game.startGame(dimX, dimY, out);
       
       if(print){
-        System.out.println(String.format("[%d x %d] Find %d cases", dimX, dimY, out.getCounter()));
+        System.out.println(String.format("[%d x %d] Found %d unique configurations", dimX, dimY, out.getCounter()));
       }else{
-        System.out.println(String.format("[%d x %d] Find %d cases by %d ms", dimX, dimY, out.getCounter(), System.currentTimeMillis() - start));
+        System.out.println(String.format("[%d x %d] Found %d unique configurations by %d ms", dimX, dimY, out.getCounter(), System.currentTimeMillis() - start));
       }
     }
   }

@@ -35,14 +35,14 @@ public class PieceCapturingTest {
   }
   
   @Test
-  public void testBisshop(){
-    Piece bisshop = new Piece(PieceType.BISSHOP);
-    bisshop.setPosition(new Point(3,3));
+  public void testBishop(){
+    Piece bishop = new Piece(PieceType.BISHOP);
+    bishop.setPosition(new Point(3,3));
     
-    Assert.assertTrue(bisshop.doesCapture(new Point(3,3)));
-    Assert.assertTrue(bisshop.doesCapture(new Point(6,6)));
-    Assert.assertTrue(bisshop.doesCapture(new Point(6,0)));
-    Assert.assertFalse(bisshop.doesCapture(new Point(6,1)));
+    Assert.assertTrue(bishop.doesCapture(new Point(3,3)));
+    Assert.assertTrue(bishop.doesCapture(new Point(6,6)));
+    Assert.assertTrue(bishop.doesCapture(new Point(6,0)));
+    Assert.assertFalse(bishop.doesCapture(new Point(6,1)));
   }
   @Test
   public void testKnight(){

@@ -10,7 +10,7 @@ import com.almasoft.chessconstructor.model.PieceType;
  * Ordering strategy that based on heuristics that we have to start from 
  * putting pieces ordered by following order:
  * 
- *   QUEEN, BISSHOP, ROOK, KNIGHT, KING
+ *   QUEEN, BISHOP, ROOK, KNIGHT, KING
  * 
  * based on capturing set size
  * 
@@ -21,7 +21,7 @@ public class PriorityOrderingPieceStrategy implements OrderingPieceStrategy {
   private Map<PieceType, Integer> game = new LinkedHashMap<PieceType, Integer>();
   public PriorityOrderingPieceStrategy(){
     game.put(PieceType.QUEEN, Integer.valueOf(0));
-    game.put(PieceType.BISSHOP, Integer.valueOf(0));
+    game.put(PieceType.BISHOP, Integer.valueOf(0));
     game.put(PieceType.ROOK, Integer.valueOf(0));
     game.put(PieceType.KNIGHT, Integer.valueOf(0));
     game.put(PieceType.KING, Integer.valueOf(0));
